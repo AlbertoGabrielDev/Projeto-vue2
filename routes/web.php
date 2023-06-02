@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
     Route::get('redirecionar' , [RenderController::class, 'index'])->name('profile.index');
-    Route::post('/registro', [RenderController::class, 'register'])->name('profile.register');
+    Route::post('/registro', [RenderController::class, 'register']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -15,21 +15,30 @@ class RenderController extends Controller
     }
 
     public function register(Request $request){
-      dd();
-        $validatedData = $request->validate([
-            'name' =>'required',
-            'email'=>'required|email|unique:registro',
-            'password'=> 'required|min:8|confirmed',
-            'phone' =>'required'
-        ]);
+        DB::beginTransaction();
+        try {
+            $validatedData = $request->validate([
+                'name' =>'required',
+                'email'=>'required|email|unique:registro',
+                'password'=> 'required|min:8|confirmed',
+                'phone' =>'required'
+            ]);
 
-        $user= new Registro;
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = Hash::make($validatedData['password']);
-        $user->phone = $validatedData['phone'];
-        $user->save();
+            $registro = Registro::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => Hash::make($validatedData['password']),
+                'phone' => $validatedData['phone']
+            ]);
 
-        return response()->json(['message'=>'Usuario cadastrado com sucesso.']);
+            DB::commit();
+
+            return response()->json(['message' => 'Usuário cadastrado com sucesso.']);
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();
+            return response()->json(['message' => 'Ocorreu um erro durante o registro do usuário.'], 500);
+        }
     }
-}
+    }
+
