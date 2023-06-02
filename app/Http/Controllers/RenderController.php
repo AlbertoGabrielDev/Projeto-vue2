@@ -7,7 +7,7 @@ use Inertia\Response;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
 class RenderController extends Controller
 {
     public function index(): Response {
@@ -27,7 +27,7 @@ class RenderController extends Controller
             $registro = Registro::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'password' => Hash::make($validatedData['password']),
+                'password' => $validatedData['password'],
                 'phone' => $validatedData['phone']
             ]);
 

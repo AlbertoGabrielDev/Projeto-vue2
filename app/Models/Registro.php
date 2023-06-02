@@ -13,6 +13,7 @@ class Registro extends Model
 
     public $fillable = [
         'name',
+        'password',
         'email',
         'phone',
     ];
