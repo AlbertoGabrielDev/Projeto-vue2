@@ -28,8 +28,9 @@ Route::get('/', function () {
     ]);
 });
 
-    Route::get('redirecionar' , [RenderController::class, 'index'])->name('profile.index');
+    Route::get('cadastro' , [RenderController::class, 'cadastro'])->name('profile.cadastro');
     Route::post('/registro', [RenderController::class, 'register']);
+    Route::get('/index', [RenderController::class, 'index'])->name('index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

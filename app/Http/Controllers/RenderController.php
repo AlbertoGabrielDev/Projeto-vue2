@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 use App\Models\Registro;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+
 class RenderController extends Controller
 {
-    public function index(): Response {
-        return Inertia::render('Redirecionar');
+    public function cadastro(): Response {
+        return Inertia::render('Cadastro');
     }
 
+    public function index(Request $request){
+         return view('Index');
+    }
     public function register(Request $request){
         DB::beginTransaction();
         try {
@@ -33,12 +37,13 @@ class RenderController extends Controller
 
             DB::commit();
 
-            return response()->json(['message' => 'Usuário cadastrado com sucesso.']);
+            
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();
             return response()->json(['message' => 'Ocorreu um erro durante o registro do usuário.'], 500);
         }
+        return redirect()->route('index');
     }
     }
 
