@@ -28,7 +28,7 @@ Route::get('/', function () {
     ]);
 });
 
-    Route::get('cadastro' , [RenderController::class, 'cadastro'])->name('profile.cadastro');
+    Route::get('/cadastro' , [RenderController::class, 'cadastro'])->name('profile.cadastro');
     Route::post('/registro', [RenderController::class, 'register']);
     Route::get('/index', [RenderController::class, 'index'])->name('index');
 

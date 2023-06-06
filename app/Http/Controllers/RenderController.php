@@ -15,8 +15,8 @@ class RenderController extends Controller
         return Inertia::render('Cadastro');
     }
 
-    public function index(Request $request){
-         return view('Index');
+    public function index(): Response{
+         return Inertia::render('Index');
     }
     public function register(Request $request){
         DB::beginTransaction();
@@ -36,14 +36,14 @@ class RenderController extends Controller
             ]);
 
             DB::commit();
-
+            //  return Inertia::location('/index');
             
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();
             return response()->json(['message' => 'Ocorreu um erro durante o registro do usuário.'], 500);
         }
-        return redirect()->route('index');
+        
     }
     }
 

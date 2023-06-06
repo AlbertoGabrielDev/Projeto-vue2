@@ -50,8 +50,11 @@ export default {
     methods:{
         submitForm(){
             axios.post('/registro',this.form)
-                .then(response=>{console.log(response.data);
-                }).catch(error => {
+                .then(()=>{
+                    // this.$router.push('/index');
+                    // window.location.href = '/index'; 
+                })
+                .catch(error => {
         if (error.response && error.response.data && error.response.data.errors) {
             console.log(error.response.data.errors);
         } else {

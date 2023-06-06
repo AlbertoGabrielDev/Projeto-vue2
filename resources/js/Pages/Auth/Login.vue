@@ -38,7 +38,7 @@ const submit = () => {
 export default {
   methods: {
     redirecionar() {
-      this.$inertia.visit(route('profile.index'));
+      this.$inertia.visit(route('profile.cadastro'));
     },
   },
 };
